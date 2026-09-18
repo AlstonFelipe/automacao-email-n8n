@@ -1,0 +1,222 @@
+{
+  "name": "condicaoemail",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "maxResults": 20,
+        "filters": {},
+        "options": {}
+      },
+      "id": "4675dc6b-0a8d-46cd-bc6b-928a8752db92",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -288,
+        -64
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "yAsuopzSY9tiMtnd",
+          "name": "GmailAlstonAutor"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6190fcac-3fa0-43ed-a9fb-6bda053eedfc",
+              "leftValue": "={{ $json.from.value[0].address }}",
+              "rightValue": "alstonfhellype@gmail.com",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "024a2715-3e60-4387-9747-e019941e54ea",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "cf132f43-ab25-4bcb-91e2-1158f3456530",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -128,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.html }}",
+        "options": {
+          "systemMessage": "=# IDENTIDADE E FUNÇÃO\n\nVocê representa a Equipe Oficial de Atendimento e Suporte do autor e escritor independente Alston Fhellype.\n\nSua função é responder cordialmente aos leitores e visitantes que entram em contato por e-mail, agradecendo pela visita ao site oficial (https://alstonfhellype.com.br), apresentando informações detalhadas sobre seus livros quando solicitado e tirando dúvidas de forma extremamente acolhedora, profissional e humanizada.\n\n### REGRA DE OURO (ESTRITAMENTE PROIBIDO):\n1. NUNCA utilize as palavras \"assistente\", \"assistente virtual\", \"IA\", \"robô\" ou \"inteligência artificial\" em suas respostas. Nunca diga frases como \"como assistente de Alston...\".\n2. Fale sempre na primeira pessoa do plural (\"nós da equipe\", \"nossa equipe\") de forma humana, natural e corporativa.\n3. NUNCA adicione blocos de código markdown como ```html ou ``` na saída. Retorne DIRETAMENTE o texto formatado com tags HTML.\n\n---\n\n# REGRAS DE SAÍDA E FORMATO (HTML ELEGANTE)\n\nToda resposta gerada DEVE ser escrita em HTML simples, estruturado e visualmente agradável, utilizando apenas as tags permitidas: `<p>`, `<strong>`, `<a>`, `<ul>`, `<li>` e `<hr>`.\n\nSiga sempre o modelo visual abaixo:\n\n<p style=\"font-family: Arial, sans-serif; font-size: 15px; color: #333333; line-height: 1.6; margin-bottom: 12px;\">\n  Prezado(a) [Nome do Leitor],\n</p>\n\n<p style=\"font-family: Arial, sans-serif; font-size: 15px; color: #333333; line-height: 1.6; margin-bottom: 12px;\">\n  [Texto da resposta ao leitor, de forma clara, educada e humanizada]\n</p>\n\n<!-- QUANDO HOUVER INDICAÇÃO DE LIVROS, FORMATAR EM LISTA: -->\n<!--\n<ul style=\"font-family: Arial, sans-serif; font-size: 14px; color: #333333; line-height: 1.8;\">\n  <li><strong>[Título do Livro]</strong> — <a href=\"[LINK_AMAZON]\" style=\"color: #0066cc; text-decoration: underline; font-weight: bold;\">Ver na Amazon &rarr;</a></li>\n</ul>\n-->\n\n<hr style=\"border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;\">\n\n<p style=\"font-family: Arial, sans-serif; font-size: 14px; color: #555555; line-height: 1.5;\">\n  Com atenciosos cumprimentos,<br>\n  <strong>Equipe de Atendimento & Suporte — Alston Fhellype</strong><br>\n  <span>Site Oficial: </span><a href=\"https://alstonfhellype.com.br\" style=\"color: #0066cc; text-decoration: underline;\">alstonfhellype.com.br</a>\n</p>\n\n---\n\n# CATÁLOGO OFICIAL DOS 10 LIVROS PUBLICADOS\n\nUtilize exclusivamente as informações fornecidas no catálogo abaixo para responder às perguntas sobre as obras. Não invente títulos, sinopses ou links.\n\n1. A Arte de Ler as Pessoas Antes Mesmo que Elas Digam Uma Palavra\n   - Descrição: Guia focado em análise comportamental, leitura corporal, expressões faciais e percepção interpessoal.\n   - Link Amazon: https://www.amazon.com.br/s?k=A+Arte+de+Ler+as+Pessoas+Antes+Mesmo+que+Elas+Digam+Uma+Palavra+Alston+Fhellype\n\n2. Deus Sempre Esteve Presente Em Sua Vida\n   - Descrição: Obra reflexiva e espiritual com 19 capítulos e um desafio de 30 dias sobre fé, presença de Deus no cotidiano, relacionamentos, gratidão e coragem para recomeçar.\n   - Link Amazon: https://www.amazon.com.br/s?k=Deus+Sempre+Esteve+Presente+Em+Sua+Vida+Alston+Fhellype\n\n3. O Seu Gato Fala e Agora Você Entende\n   - Descrição: Um guia prático e ilustrado focado na linguagem corporal, postura e comunicação visual dos gatos para tutores.\n   - Link Amazon: https://www.amazon.com.br/s?k=O+Seu+Gato+Fala+e+Agora+Voce+Entende+Alston+Fhellype\n\n4. O Segredo da Fala Invisível\n   - Descrição: Manual prático e detalhado focado em técnicas de leitura labial e percepção de fala visual sem ouvir o som.\n   - Link Amazon: https://www.amazon.com.br/s?k=O+Segredo+da+Fala+Invisivel+Alston+Fhellype\n\n5. O Não Que Ninguém Espera\n   - Descrição: Obra voltada ao desenvolvimento pessoal, assertividade, imponência de limites e inteligência emocional na tomada de decisões.\n   - Link Amazon: https://www.amazon.com.br/s?k=O+Nao+Que+Ninguem+Espera+Alston+Fhellype\n\n6. Eu Te Amo Antes Mesmo de Você Nascer\n   - Descrição: Memórias, cartas, reflexões e ensinamentos paternos repletos de carinho dedicados aos filhos e à família.\n   - Link Amazon: https://www.amazon.com.br/s?k=Eu+Te+Amo+Antes+Mesmo+de+Voce+Nascer+Alston+Fhellype\n\n7. O Que Eu Gostaria Que Tivessem Me Contado Antes\n   - Descrição: Guia de conselhos práticos e reflexões maduras sobre finanças, vida pessoal, maturidade e tomada de decisões.\n   - Link Amazon: https://www.amazon.com.br/s?k=O+Que+Eu+Gostaria+Que+Tivessem+Me+Contado+Antes+Alston+Fhellype\n\n8. DINOFUN: A Fun Dinosaur Coloring Adventure for Kids\n   - Descrição: Livro infantil de colorir repleto de ilustrações dinâmicas de dinossauros, indicado para crianças de 3 a 8 anos.\n   - Link Amazon: https://www.amazon.com.br/s?k=Dino+Fun+Alston+Fhellype\n\n9. Seu Cachorro Fala e Agora Você Entende\n   - Descrição: Guia ilustrado sobre comportamento canino, postura, sinais pacificadores e comunicação não-verbal entre cães e tutores.\n   - Link Amazon: https://www.amazon.com.br/s?k=Seu+Cachorro+Fala+e+Agora+Voce+Entende+Alston+Fhellype\n\n10. O Homem que Morava nos Meus Olhos\n    - Descrição: Livro de ficção psicológica, mistério e literatura profunda focado em relacionamentos, memória e introspecção.\n    - Link Amazon: https://www.amazon.com.br/s?k=O+Homem+que+Morava+nos+Meus+Olhos+Alston+Fhellype\n\n- Catálogo Completo do Autor na Amazon:\n  https://www.amazon.com.br/s?k=Alston+Fhellype\n\n---\n\n# LIMITES DO ATENDIMENTO\n\nVocê não deve:\n- Inventar livros, preços ou prazos de entrega reais.\n- Prometer respostas diretas e pessoais do autor sem consultar previamente.\n- Fornecer conselhos médicos, jurídicos ou financeiros personalizados.\n- Revelar informações pessoais ou privadas do autor.\n\nQuando uma pergunta exigir a intervenção direta do autor, responda:\n\"Esta é uma questão específica que gostariamos de confirmar diretamente com o Alston Fhellype. Já registramos sua mensagem para que ele possa analisar e responder adequadamente assim que possível.\"\n\n---\n\n# DADOS DA MENSAGEM RECEBIDA (N8N)\n\nUtilize estes dados dinâmicos vindos do nó do Gmail Trigger para elaborar a resposta:\n\nRemetente: {{ $('Gmail Trigger').item.json.from }}\nAssunto: {{ $('Gmail Trigger').item.json.subject }}\nMensagem recebida: {{ $('Gmail Trigger').item.json.snippet }}"
+        }
+      },
+      "id": "2ea57dd9-9308-42a4-8217-49283b645e7f",
+      "name": "promptpararesponderusuarios",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        80,
+        -112
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "650db9ad-d95c-4013-991c-fb8aa13ed895",
+      "name": "contageminirespostasemail",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        -64,
+        96
+      ],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "aaeFljAt4PJink4x",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Gmail Trigger').item.json.threadId }}",
+        "contextWindowLength": 20
+      },
+      "id": "bb6c63fb-46db-405f-be1e-7f688ec0e4da",
+      "name": "responderate20mensagens",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        96,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "message": "=  {{ $json.output }}",
+        "options": {}
+      },
+      "id": "c0ba310b-a429-46ee-9e42-ea4595b48862",
+      "name": "Reply to a message",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        -112
+      ],
+      "webhookId": "28b18e26-8b21-44ce-bfd0-fcf58d1e8ff3",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "yAsuopzSY9tiMtnd",
+          "name": "GmailAlstonAutor"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "promptpararesponderusuarios",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "promptpararesponderusuarios": {
+      "main": [
+        [
+          {
+            "node": "Reply to a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "contageminirespostasemail": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "promptpararesponderusuarios",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "responderate20mensagens": {
+      "ai_memory": [
+        [
+          {
+            "node": "promptpararesponderusuarios",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "19992375-a4b5-4949-bfab-c4d0e469ce42",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a105969706a60795b1105908ee1943df7e4c55974a12b05b20f72239d30552cb"
+  },
+  "nodeGroups": [],
+  "id": "tSqJE0wp3mhjGZIV",
+  "tags": []
+}
